@@ -1,0 +1,15 @@
+FROM postgres:15.4
+
+ENV POSTGRES_USER=postgres
+ENV POSTGRES_PASSWORD=postgres
+ENV POSTGRES_DB=postgres
+
+COPY ./scripts/db_create.sql /docker-entrypoint-initdb.d/
+COPY ./scripts/db_insert.sql /docker-entrypoint-initdb.d/
+
+ARG POSTGRES_USER
+ARG POSTGRES_PASSWORD
+ARG POSTGRES_DB
+ENV POSTGRES_USER=${POSTGRES_USER}
+ENV POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+ENV POSTGRES_DB=${POSTGRES_DB}
